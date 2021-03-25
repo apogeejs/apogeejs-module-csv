@@ -53,7 +53,7 @@ export default class CSVComponentView extends FormInputBaseComponentView {
                 return this.getFormDataDisplay(displayContainer);
 
             case FormInputBaseComponentView.VIEW_INFO: 
-                let dataDisplaySource = dataDisplayHelper.getStandardErrorDataSource(this.getApp(),this);
+                dataDisplaySource = dataDisplayHelper.getStandardErrorDataSource(this.getApp(),this);
                 return new StandardErrorDisplay(displayContainer,dataDisplaySource);
 
             default:
