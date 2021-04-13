@@ -38,4 +38,4 @@ const CSVComponentModule = {
     }
 }
 
-export default CSVComponentModule;
+export {CSVComponentModule as default};

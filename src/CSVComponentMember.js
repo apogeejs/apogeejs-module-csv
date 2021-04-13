@@ -1,7 +1,7 @@
 import papaparse from "../lib/papaparse.es.js";
 
 //this makes the papaparse library available globally
-__globals__.papaparse = papaparse;
+__globals__.__papaparse = papaparse;
 
 const CSVComponentMember = {
     defineMember: function() {

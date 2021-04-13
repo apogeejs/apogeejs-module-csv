@@ -1,0 +1,6 @@
+{
+  "name": "stream",
+  "version": "0.0.0",
+  "description": "I need a workaround for stream when running ni the browser",
+  "main": "stream-workaround.js"
+}
