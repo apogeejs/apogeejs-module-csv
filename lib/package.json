@@ -1,0 +1,12 @@
+{
+  "name": "convert-papaparse",
+  "version": "5.3.0",
+  "description": "This is used to load the papaparse cjs module to convert it to ES format",
+  "dependencies": {
+    "papaparse": "5.3.0",
+    "stream": "./stream-workaround"
+  },
+  "scripts": {
+    "buildace": "rollup --config rollup.aceconfig.js"
+  }
+}

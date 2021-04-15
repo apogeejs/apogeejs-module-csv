@@ -1,16 +1,41 @@
+import CSVComponentMember from "./CSVComponentMember.js";
 import CSVComponent from "./CSVComponent.js";
 import CSVComponentView from "./CSVComponentView.js";
 
-//These are in lieue of the import statements
-let componentInfo = apogeeapp.componentInfo;
-let registerComponentView = apogeeview.registerComponentView;
+const CSVComponentModule = {
+    initApogeeModule: function() {
+        //------------------------------
+        // register the custom member
+        //------------------------------
+        CSVComponentMember.defineMember();
 
-//-------------------------------
-//register the button component
-//-------------------------------
-componentInfo.registerComponent(CSVComponent);
+        //-------------------------------
+        //register the parse csv component
+        //-------------------------------
+        apogeeapp.componentInfo.registerComponent(CSVComponent);
 
-//-------------------------------
-//register the button component view
-//-------------------------------
-registerComponentView(CSVComponentView);
+        //-------------------------------
+        //register the parse csv component view
+        //-------------------------------
+        apogeeview.registerComponentView(CSVComponentView);
+    },
+
+    removeApogeeModule: function() {
+        //------------------------------
+        // unregister the custom member
+        //------------------------------
+        CSVComponentMember.undefineMember();
+
+        //-------------------------------
+        //register the parse csv component
+        //-------------------------------
+        apogeeapp.componentInfo.unregisterComponent(CSVComponent);
+
+        //-------------------------------
+        //register the parse csv component view
+        //-------------------------------
+        apogeeview.unregisterComponentView(CSVComponentView);
+    }
+}
+
+export {CSVComponentModule as default};
