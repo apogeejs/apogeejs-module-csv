@@ -5,14 +5,12 @@
 
 'use strict';
 
-var papaparse = require('papaparse');
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var papaparse__default = /*#__PURE__*/_interopDefaultLegacy(papaparse);
+var papaparse = _interopDefault(require('papaparse'));
 
 //this makes the papaparse library available globally
-__globals__.papaparse = papaparse__default['default'];
+__globals__.__papaparse = papaparse;
 
 const CSVComponentMember = {
     defineMember: function() {
