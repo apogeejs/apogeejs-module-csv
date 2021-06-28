@@ -52,7 +52,7 @@ export default class CSVComponentView extends FormInputBaseComponentView {
             case CSVComponentView.VIEW_INPUT:
                 return this.getFormDataDisplay(displayContainer);
 
-            case FormInputBaseComponentView.VIEW_INFO: 
+            case FormInputBaseComponentView.VIEW_ERROR: 
                 dataDisplaySource = dataDisplayHelper.getStandardErrorDataSource(this.getApp(),this);
                 return new StandardErrorDisplay(displayContainer,dataDisplaySource);
 
@@ -201,10 +201,10 @@ CSVComponentView.VIEW_HEADER = "Header";
 CSVComponentView.VIEW_DATA = "Data";
 
 CSVComponentView.VIEW_MODES = [
-    FormInputBaseComponentView.VIEW_INFO_MODE_ENTRY,
+    FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
     {name: CSVComponentView.VIEW_HEADER, label: "Header", isActive: false},
     {name: CSVComponentView.VIEW_DATA, label: "Data", isActive: false},
-    FormInputBaseComponentView.INPUT_VIEW_MODE_INFO
+    FormInputBaseComponentView.INPUT_VIEW_MODE_CONFIG
 ];
 
 CSVComponentView.TABLE_EDIT_SETTINGS = {
