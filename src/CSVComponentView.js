@@ -202,8 +202,22 @@ CSVComponentView.VIEW_DATA = "Data";
 
 CSVComponentView.VIEW_MODES = [
     FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
-    {name: CSVComponentView.VIEW_HEADER, label: "Header", isActive: false},
-    {name: CSVComponentView.VIEW_DATA, label: "Data", isActive: false},
+    {
+        name: CSVComponentView.VIEW_HEADER,
+        label: "Header",
+        sourceLayer: "model", 
+        sourceType: "data",
+        suffix: ".data.header",
+        isActive: false
+    },
+    {
+        name: CSVComponentView.VIEW_DATA,
+        label: "Data",
+        sourceLayer: "model", 
+        sourceType: "data",
+        suffix: ".data.body",
+        isActive: false
+    },
     FormInputBaseComponentView.INPUT_VIEW_MODE_CONFIG
 ];
 
