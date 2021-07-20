@@ -8,6 +8,8 @@ export default class CSVComponent extends Component {
     }
 }
 
-CSVComponent.displayName = "Parse CSV Cell"
-CSVComponent.uniqueName = "apogeeapp.ParseCSVCell";
-CSVComponent.DEFAULT_MEMBER_JSON = getFormComponentDefaultMemberJson("apogeeapp.ParseCSVCell-data");
+CSVComponent.CLASS_CONFIG = {
+    displayName: "Parse CSV Cell",
+    uniqueName: "apogeeapp.ParseCSVCell",
+    defaultMemberJson: getFormComponentDefaultMemberJson("apogeeapp.ParseCSVCell-data")
+}
