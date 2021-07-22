@@ -1,64 +1,37 @@
 //These are in lieue of the import statements
-let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,StandardErrorDisplay,dataDisplayHelper} = apogeeview;
+let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,dataDisplayHelper,getErrorViewModeEntry} = apogeeview;
 
 /** This is a graphing component using ChartJS. It consists of a single data table that is set to
  * hold the generated chart data. The input is configured with a form, which gives multiple options
  * for how to set the data. */
 export default class CSVComponentView extends FormInputBaseComponentView {
 
-    constructor(appViewInterface,component) {
-        super(appViewInterface,component);
-    };
-
     //=================================
     // Implementation Methods
     //=================================
 
-    /**  This method retrieves the table edit settings for this component instance
-     * @protected */
-    getTableEditSettings() {
-        return CSVComponentView.TABLE_EDIT_SETTINGS;
+    getHeaderViewDisplay(displayContainer) {
+        let dataDisplaySource = this._getHeaderDataSource();
+        let editor = new HandsonGridEditor(displayContainer,dataDisplaySource);
+        editor.updateHeight(HEADER_GRID_PIXEL_HEIGHT);
+        return editor;
     }
 
-    /** This method should be implemented to retrieve a data display of the give type. 
-     * @protected. */
-    getDataDisplay(displayContainer,viewType) {
-        let dataDisplaySource;
-        switch(viewType) {
+    getBodyViewDisplay(displayContainer) {
+        //figure out if we want a grid or plain json
+        let formResultMember = this.getComponent().getField("member.formResult");
+        let formResultData = formResultMember.getData();
+        let useMapsFormat = false;
+        if(formResultData) {
+            useMapsFormat = (formResultData.outputFormat == "maps");
+        }
 
-            case CSVComponentView.VIEW_HEADER:
-                dataDisplaySource = this._getHeaderDataSource();
-                let editor = new HandsonGridEditor(displayContainer,dataDisplaySource);
-                editor.updateHeight(HEADER_GRID_PIXEL_HEIGHT);
-                return editor;
-
-            case CSVComponentView.VIEW_DATA:
-                //figure out if we want a grid or plain json
-                let formResultMember = this.getComponent().getField("member.formResult");
-                let formResultData = formResultMember.getData();
-                let useMapsFormat = false;
-                if(formResultData) {
-                    useMapsFormat = (formResultData.outputFormat == "maps");
-                }
-
-                dataDisplaySource = this._getBodyDataSource(useMapsFormat);
-                if(useMapsFormat) {
-                    return new AceTextEditor(displayContainer,dataDisplaySource,"ace/mode/json",AceTextEditor.OPTION_SET_DISPLAY_SOME);
-                }
-                else {
-                    return new HandsonGridEditor(displayContainer,dataDisplaySource);
-                }
-
-            case CSVComponentView.VIEW_INPUT:
-                return this.getFormDataDisplay(displayContainer);
-
-            case FormInputBaseComponentView.VIEW_ERROR: 
-                dataDisplaySource = dataDisplayHelper.getStandardErrorDataSource(this.getApp(),this);
-                return new StandardErrorDisplay(displayContainer,dataDisplaySource);
-
-            default:
-                console.error("unrecognized view element: " + viewType);
-                return null;
+        let dataDisplaySource = this._getBodyDataSource(useMapsFormat);
+        if(useMapsFormat) {
+            return new AceTextEditor(displayContainer,dataDisplaySource,"ace/mode/json",AceTextEditor.OPTION_SET_DISPLAY_SOME);
+        }
+        else {
+            return new HandsonGridEditor(displayContainer,dataDisplaySource);
         }
     }
 
@@ -189,46 +162,32 @@ export default class CSVComponentView extends FormInputBaseComponentView {
 
 }
 
-//======================================
-// Static properties
-//======================================
-
-//===================================
-// View Definitions Constants (referenced internally)
-//==================================
-
-CSVComponentView.VIEW_HEADER = "Header";
-CSVComponentView.VIEW_DATA = "Data";
+//===============================
+// Required External Settings
+//===============================
 
 CSVComponentView.VIEW_MODES = [
-    FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
+    getErrorViewModeEntry(),
     {
-        name: CSVComponentView.VIEW_HEADER,
+        name: "Header",
         label: "Header",
         sourceLayer: "model", 
         sourceType: "data",
         suffix: ".data.header",
-        isActive: false
+        isActive: false,
+        getDataDisplay: (componentView,displayContainer) => componentView.getHeaderViewDisplay(displayContainer)
     },
     {
-        name: CSVComponentView.VIEW_DATA,
+        name: "Data",
         label: "Data",
         sourceLayer: "model", 
         sourceType: "data",
         suffix: ".data.body",
-        isActive: false
+        isActive: true,
+        getDataDisplay: (componentView,displayContainer) => componentView.getBodyViewDisplay(displayContainer)
     },
-    FormInputBaseComponentView.INPUT_VIEW_MODE_CONFIG
+    FormInputBaseComponentView.getConfigViewModeEntry(),
 ];
-
-CSVComponentView.TABLE_EDIT_SETTINGS = {
-    "viewModes": CSVComponentView.VIEW_MODES
-}
-
-
-//===============================
-// Required External Settings
-//===============================
 
 /** This is the component name with which this view is associated. */
 CSVComponentView.componentName = "apogeeapp.ParseCSVCell";
