@@ -2,11 +2,7 @@
 let {Component,getFormComponentDefaultMemberJson} = apogeeapp;
 
 /** This is a simple custom component example. */
-export default class CSVComponent extends Component {
-    constructor(member,modelManager,instanceToCopy,keepUpdatedFixed) {
-        super(member,modelManager,instanceToCopy,keepUpdatedFixed);
-    }
-}
+export default class CSVComponent extends Component {}
 
 CSVComponent.CLASS_CONFIG = {
     displayName: "Parse CSV Cell",
