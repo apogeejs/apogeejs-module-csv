@@ -1,5 +1,5 @@
 import CSVComponentMember from "./CSVComponentMember.js";
-import CSVComponent from "./CSVComponent.js";
+import CSVComponentConfig from "./CSVComponent.js";
 import CSVComponentView from "./CSVComponentView.js";
 
 const CSVComponentModule = {
@@ -12,7 +12,7 @@ const CSVComponentModule = {
         //-------------------------------
         //register the parse csv component
         //-------------------------------
-        apogeeapp.componentInfo.registerComponent(CSVComponent);
+        apogeeapp.componentInfo.registerComponent(CSVComponentConfig);
 
         //-------------------------------
         //register the parse csv component view
@@ -29,7 +29,7 @@ const CSVComponentModule = {
         //-------------------------------
         //register the parse csv component
         //-------------------------------
-        apogeeapp.componentInfo.unregisterComponent(CSVComponent);
+        apogeeapp.componentInfo.unregisterComponent(CSVComponentConfig);
 
         //-------------------------------
         //register the parse csv component view
