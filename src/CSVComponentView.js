@@ -4,7 +4,7 @@ let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,dataDisplayHelpe
 /** This is a graphing component using ChartJS. It consists of a single data table that is set to
  * hold the generated chart data. The input is configured with a form, which gives multiple options
  * for how to set the data. */
-export default class CSVComponentView extends FormInputBaseComponentView {
+class CSVComponentView extends FormInputBaseComponentView {
 
     //=================================
     // Implementation Methods
@@ -163,43 +163,39 @@ export default class CSVComponentView extends FormInputBaseComponentView {
 }
 
 //===============================
-// Required External Settings
+// View Config
 //===============================
 
-CSVComponentView.VIEW_MODES = [
-    getErrorViewModeEntry(),
-    {
-        name: "Header",
-        label: "Header",
-        sourceLayer: "model", 
-        sourceType: "data",
-        suffix: ".data.header",
-        isActive: false,
-        getDataDisplay: (componentView,displayContainer) => componentView.getHeaderViewDisplay(displayContainer)
-    },
-    {
-        name: "Data",
-        label: "Data",
-        sourceLayer: "model", 
-        sourceType: "data",
-        suffix: ".data.body",
-        isActive: true,
-        getDataDisplay: (componentView,displayContainer) => componentView.getBodyViewDisplay(displayContainer)
-    },
-    FormInputBaseComponentView.getConfigViewModeEntry(),
-];
-
-/** This is the component name with which this view is associated. */
-CSVComponentView.componentName = "apogeeapp.ParseCSVCell";
-
-/** If true, this indicates the component has a tab entry */
-CSVComponentView.hasTabEntry = false;
-/** If true, this indicates the component has an entry appearing on the parent tab */
-CSVComponentView.hasChildEntry = true;
-
-/** This is the icon url for the component. */
-CSVComponentView.ICON_RES_PATH = "/icons3/gridCellIcon.png";
-
+const CSVComponentViewConfig = {
+    componentType: "apogeeapp.ParseCSVCell",
+    viewClass: CSVComponentView,
+    viewModes: [
+        getErrorViewModeEntry(),
+        {
+            name: "Header",
+            label: "Header",
+            sourceLayer: "model", 
+            sourceType: "data",
+            suffix: ".data.header",
+            isActive: false,
+            getDataDisplay: (componentView,displayContainer) => componentView.getHeaderViewDisplay(displayContainer)
+        },
+        {
+            name: "Data",
+            label: "Data",
+            sourceLayer: "model", 
+            sourceType: "data",
+            suffix: ".data.body",
+            isActive: true,
+            getDataDisplay: (componentView,displayContainer) => componentView.getBodyViewDisplay(displayContainer)
+        },
+        FormInputBaseComponentView.getConfigViewModeEntry(),
+    ],
+    hasTabEntry: false,
+    hasChildEntry: true,
+    iconResPath: "/icons3/gridCellIcon.png"
+}
+export default CSVComponentViewConfig;
 //-----------------------
 // Other random internal constants
 //-----------------------
