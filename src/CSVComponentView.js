@@ -91,33 +91,25 @@ class CSVComponentView extends FormInputBaseComponentView {
             },
     
             getData: () => {
-                //here we need to extract data from the member so we return
-                //the starndard wrapped data for the non-normal case and 
-                //extract the proper data for the normal case, returning
-                //unwrapped data in that case.
-                let allDataMember = this.getComponent().getField("member.data");
-				if(allDataMember.getState() != apogeeutil.STATE_NORMAL) {
-					return dataDisplayHelper.getStandardWrappedMemberData(allDataMember);
-				}
-				else {
-					let allData = allDataMember.getData();
-					if(allData != apogeeutil.INVALID_VALUE) {
-                        let bodyData = allData.body;
-                        if(useMapsFormat) {
-                            if(!bodyData) bodyData = [];
-                            //return text for text editor
-                            return JSON.stringify(bodyData,null,JSON_TEXT_FORMAT_STRING);
-                        }
-                        else {
-                            //return json for grid editor
-                            if(!bodyData) bodyData = [[]];
-                            return bodyData;
-                        }
-					}
-					else {
-						return apogeeutil.INVALID_VALUE
-					}
-				}
+                //Here we return just body part of the data
+                let wrappedData = dataDisplayHelper.getWrappedMemberData(this,"member.data");
+                if(wrappedData.data != INVALID_VALUE) {
+                    let allData = wrappedData.data;
+                    let bodyData
+                    if(allData) bodyData = allData.body;
+                    if(useMapsFormat) {
+                        if(!bodyData) bodyData = [];
+                        //return text for text editor
+                        wrappedData.data = JSON.stringify(bodyData,null,JSON_TEXT_FORMAT_STRING);
+                    }
+                    else {
+                        //return json for grid editor
+                        if(!bodyData) bodyData = [[]];
+                        wrappedDdata.data = bodyData;
+                    }
+                }
+
+                return wrappedData;
             }
         }
     }
@@ -133,29 +125,21 @@ class CSVComponentView extends FormInputBaseComponentView {
             },
     
             getData: () => {
-                //here we need to extract data from the member so we return
-                //the starndard wrapped data for the non-normal case and 
-                //extract the proper data for the normal case, returning
-                //unwrapped data in that case.
-                let allDataMember = this.getComponent().getField("member.data");
-				if(allDataMember.getState() != apogeeutil.STATE_NORMAL) {
-					return dataDisplayHelper.getStandardWrappedMemberData(allDataMember);
-				}
-				else {
-					let allData = allDataMember.getData();
-					if(allData != apogeeutil.INVALID_VALUE) {
-                        let header = allData.header;
-                        if(header) {
-                            return [header]
-                        }
-                        else {
-                            return []
-                        }
-					}
-					else {
-						return apogeeutil.INVALID_VALUE
-					}
-				}
+                //Here we return just header part of the data
+                let wrappedData = dataDisplayHelper.getWrappedMemberData(this,"member.data");
+                if(wrappedData.data != INVALID_VALUE) {
+                    let allData = wrappedData.data;
+                    let headerData
+                    if(allData) headerData = allData.body;
+                    if(headerData) {
+                        return [headerData]
+                    }
+                    else {
+                        return []
+                    }
+                }
+
+                return wrappedData;
             }
         }
     }
