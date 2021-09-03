@@ -175,8 +175,6 @@ const CSVComponentViewConfig = {
         },
         FormInputBaseComponentView.getConfigViewModeEntry(),
     ],
-    hasTabEntry: false,
-    hasChildEntry: true,
     iconResPath: "/icons3/gridCellIcon.png"
 }
 export default CSVComponentViewConfig;
