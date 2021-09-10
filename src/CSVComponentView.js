@@ -93,7 +93,7 @@ class CSVComponentView extends FormInputBaseComponentView {
             getData: () => {
                 //Here we return just body part of the data
                 let wrappedData = dataDisplayHelper.getWrappedMemberData(this,"member.data");
-                if(wrappedData.data != INVALID_VALUE) {
+                if(wrappedData.data != apogeeutil.INVALID_VALUE) {
                     let allData = wrappedData.data;
                     let bodyData
                     if(allData) bodyData = allData.body;
@@ -105,7 +105,7 @@ class CSVComponentView extends FormInputBaseComponentView {
                     else {
                         //return json for grid editor
                         if(!bodyData) bodyData = [[]];
-                        wrappedDdata.data = bodyData;
+                        wrappedData.data = bodyData;
                     }
                 }
 
@@ -127,7 +127,7 @@ class CSVComponentView extends FormInputBaseComponentView {
             getData: () => {
                 //Here we return just header part of the data
                 let wrappedData = dataDisplayHelper.getWrappedMemberData(this,"member.data");
-                if(wrappedData.data != INVALID_VALUE) {
+                if(wrappedData.data != apogeeutil.INVALID_VALUE) {
                     let allData = wrappedData.data;
                     let headerData
                     if(allData) headerData = allData.body;
