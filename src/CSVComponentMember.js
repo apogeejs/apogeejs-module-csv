@@ -5,7 +5,7 @@ __globals__.__papaparse = papaparse;
 
 const CSVComponentMember = {
     defineMember: function() {
-        apogee.defineHardcodedJsonTable(DATA_MEMBER_TYPE_NAME,DATA_MEMBER_FUNCTION_BODY);
+        apogee.defineHardcodedDataMember(DATA_MEMBER_TYPE_NAME,DATA_MEMBER_FUNCTION_BODY);
     },
 
     undefineMember: function() {
