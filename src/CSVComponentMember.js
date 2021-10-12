@@ -1,8 +1,5 @@
 import papaparse from "../lib/papaparse.es.js";
 
-//this makes the papaparse library available globally
-__globals__.__papaparse = papaparse;
-
 const CSVComponentMember = {
     defineMember: function() {
         apogee.defineHardcodedDataMember(DATA_MEMBER_TYPE_NAME,DATA_MEMBER_FUNCTION_BODY);
@@ -10,6 +7,10 @@ const CSVComponentMember = {
 
     undefineMember: function() {
         apogee.Model.removeMemberGenerator(DATA_MEMBER_TYPE_NAME);
+    },
+
+    getModelDataExport: function() {
+        return modelDataExport;
     }
 }
 
@@ -21,13 +22,18 @@ const DATA_MEMBER_TYPE_NAME = "apogeeapp.ParseCSVCell-data";
 
 //this is the function body for out member
 //we define the content in a global function (below)
-const DATA_MEMBER_FUNCTION_BODY = `
+const DATA_MEMBER_FUNCTION_BODY = `    
+let csvData = apogeeModuleExport("csv");
+return csvData.parseData(formResult);
+`
+
+let parseData = function(formResult) {
     if((formResult)&&(formResult.input)) {
         let options = {};
         options.dynamicTyping = formResult.dynamicTyping;
         options.skipEmptyLines = formResult.skipEmptyLines;
         options.header = (formResult.outputFormat == "maps");
-        let parseResult = __papaparse.parse(formResult.input,options);
+        let parseResult = papaparse.parse(formResult.input,options);
         if(parseResult.errors.length == 0) {
             let headerRow;
             let body;
@@ -67,4 +73,8 @@ const DATA_MEMBER_FUNCTION_BODY = `
             body: [[]]
         };
     }
-`
+}
+
+let modelDataExport = {};
+
+modelDataExport.parseData = parseData;

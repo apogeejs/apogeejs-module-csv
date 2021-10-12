@@ -35,6 +35,10 @@ const CSVComponentModule = {
         //register the parse csv component view
         //-------------------------------
         apogeeview.unregisterComponentView(CSVComponentViewConfig);
+    },
+
+    getDataExport: function() {
+        return CSVComponentMember.getModelDataExport();
     }
 }
 

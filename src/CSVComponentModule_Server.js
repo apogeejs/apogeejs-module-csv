@@ -15,6 +15,10 @@ const CSVComponentModule = {
         // unregister the custom member
         //------------------------------
         CSVComponentMember.undefineMember();
+    },
+
+    getDataExport: function() {
+        return CSVComponentMember.getModelDataExport();
     }
 }
 
