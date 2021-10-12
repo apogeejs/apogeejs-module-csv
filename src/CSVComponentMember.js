@@ -23,7 +23,7 @@ const DATA_MEMBER_TYPE_NAME = "apogeeapp.ParseCSVCell-data";
 //this is the function body for out member
 //we define the content in a global function (below)
 const DATA_MEMBER_FUNCTION_BODY = `    
-let csvData = apogeeModuleExport("csv");
+let csvData = apogeeModuleExport("apogeejs-module-csv");
 return csvData.parseData(formResult);
 `
 
