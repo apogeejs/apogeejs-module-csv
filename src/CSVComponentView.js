@@ -1,5 +1,5 @@
 //These are in lieue of the import statements
-let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,dataDisplayHelper,getErrorViewModeEntry} = apogeeview;
+let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,dataDisplayHelper,getErrorViewModeEntry} = apogeeapp;
 
 /** This is a graphing component using ChartJS. It consists of a single data member that is set to
  * hold the generated chart data. The input is configured with a form, which gives multiple options

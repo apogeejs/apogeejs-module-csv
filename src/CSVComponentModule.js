@@ -13,11 +13,6 @@ const CSVComponentModule = {
         //register the parse csv component
         //-------------------------------
         apogeeapp.componentInfo.registerComponent(CSVComponentConfig);
-
-        //-------------------------------
-        //register the parse csv component view
-        //-------------------------------
-        apogeeview.registerComponentView(CSVComponentViewConfig);
     },
 
     removeApogeeModule: function() {
@@ -30,11 +25,6 @@ const CSVComponentModule = {
         //register the parse csv component
         //-------------------------------
         apogeeapp.componentInfo.unregisterComponent(CSVComponentConfig);
-
-        //-------------------------------
-        //register the parse csv component view
-        //-------------------------------
-        apogeeview.unregisterComponentView(CSVComponentViewConfig);
     },
 
     getDataExport: function() {
